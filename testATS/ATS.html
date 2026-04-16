@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ÀTonService</title>
+
+<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
+
+<style>
+
+.about-pro {
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 15px;
+    margin-bottom: 20px;
+}
+
+.about-header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.about-header h2 {
+    margin: 0;
+    font-size: 22px;
+    color: #0a7cff;
+}
+
+.about-header p {
+    font-size: 14px;
+    color: #555;
+}
+
+.about-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+}
+
+.about-card {
+    background: #0a7cff;
+    padding: 15px;
+    border-radius: 12px;
+    text-align: center;
+    transition: 0.3s;
+}
+
+.about-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+}
+
+.icon {
+    font-size: 22px;
+    margin-bottom: 8px;
+}
+
+.about-card h4 {
+    margin: 5px 0;
+    font-size: 16px;
+    color: #f5f5f5;
+}
+
+.about-card p {
+    font-size: 13px;
+    color: #f5efef;
+}
+.main-header {
+    background: linear-gradient(135deg, #0a7cff, #00c6ff);
+    color: white;
+    text-align: center;
+    padding: 25px 15px;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+
+    animation: fadeIn 1s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from {opacity:0; transform: translateY(-20px);}
+    to {opacity:1; transform: translateY(0);}
+}
+
+.main-header h1 {
+    margin: 0;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.main-header p {
+    margin-top: 8px;
+    font-size: 14px;
+    opacity: 0.9;
+}
+
+.signup-btn {
+    width: 100%;
+    padding: 15px;
+    font-size: 18px;
+    font-weight: bold;
+    background: linear-gradient(135deg, #0a7cff, #00c6ff);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    margin-top: 10px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.signup-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+.signup-btn:active {
+    transform: scale(0.98);
+}
+
+body {font-family:sans-serif; margin:0; background:#f5f5f5;}
+header {background:#0a7cff; color:white; text-align:center; padding:15px;}
+.container {padding:15px;}
+.card {background:white;padding:12px;margin:10px 0;border-radius:20px;}
+.premium {border:3px solid gold;}
+button {margin:3px;padding:8px;border:none;border-radius:6px;color:white;cursor:pointer;}
+.reserv {background: #680aff;}
+.whatsapp{background:#25D366;}
+.payment{background:#ff6f00;}
+.loc{background:#555;}
+#map{height:300px;border-radius:10px;margin-top:10px;}
+select,input{width:100%;padding:8px;margin:5px 0;}
+.call {background:#0a7cff;font-weight:bold;}
+.warning-box {
+    background: #fff3cd;
+    color: #856404;
+    padding: 15px;
+    margin: 15px;
+    border-radius: 12px;
+    border-left: 5px solid #ff9800;
+    font-size: 14px;
+    line-height: 1.5;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    animation: fadeIn 0.8s ease;
+}
+</style>
+</head>
+
+<body>
+
+<header class="main-header">
+    <h1>ÀTonService</h1>
+    <p>Trouve un prestataire rapidement autour de toi</p>
+</header>
+
+<div class="warning-box">
+    ⚠️ <b>Important :</b> Pour votre sécurité, les paiements s’effectuent uniquement :
+    <br>• via le bouton 💰 paiement sur la plateforme
+    <br>• ou en appelant directement le numéro officiel (93264869)
+    <br><br>
+    ❌ Ne payez jamais un prestataire en dehors de ces moyens.
+</div>
+
+<section class="about-pro">
+
+    <div class="about-header">
+      <h2>Des services fiables, près de chez vous</h2>
+      <p>
+        ÀTonService connecte rapidement les habitants avec des prestataires disponibles dans leur quartier.
+      </p>
+    </div>
+  
+    <div class="about-grid">
+  
+      <div class="about-card">
+        <div class="icon">⚡</div>
+        <h4>Rapide</h4>
+        <p>Trouve un prestataire en quelques secondes.</p>
+      </div>
+  
+      <div class="about-card">
+        <div class="icon">📍</div>
+        <h4>Local</h4>
+        <p>Des services proches de toi, dans ton quartier.</p>
+      </div>
+  
+      <div class="about-card">
+        <div class="icon">🤝</div>
+        <h4>Fiable</h4>
+        <p>Des prestataires vérifiés et disponibles.</p>
+      </div>
+  
+    </div>
+  
+  </section>
+
+<div class="container">
+
+<input id="search" placeholder="Rechercher..." onkeyup="filterCards()">
+
+<select id="filterService" onchange="filterCards()">
+<option value="">Tous services</option>
+<option>Nettoyage</option>
+<option>Cuisine</option>
+<option>Lavage</option>
+<option>Courses</option>
+<option>Réparation</option>
+</select>
+
+<select id="filterQuartier" onchange="filterCards()">
+<option value="">Tous quartiers</option>
+<option>Hedzranawoé</option>
+<option>Kégué</option>
+<option>Adidogomé</option>
+<option>Tokoin</option>
+<option>Bè</option>
+</select>
+
+<div id="servicesList"></div>
+
+<div id="map"></div>
+
+<h3>Proposer tes services</h3>
+
+<input id="name" placeholder="Nom">
+<input id="phone" placeholder="Téléphone">
+
+<select id="service">
+<option>Nettoyage</option>
+<option>Cuisine</option>
+<option>Lavage</option>
+<option>Courses</option>
+<option>Réparation</option>
+</select>
+
+<input id="quartier" placeholder="Quartier">
+
+<select id="premium">
+<option value="0">Standard (gratuit)</option>
+<option value="1">Premium (500 FCFA / 30 jours)</option>
+</select>
+
+<button class="signup-btn" onclick="register()">S'inscrire</button>
+
+</div>
+
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+<script>
+
+// CONFIG
+const myNumber = "22893264869"; // TON NUMERO
+
+// INIT MAP
+const map = L.map('map').setView([6.135, 1.217], 14);
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+
+// ICONS
+const premiumIcon = L.icon({
+    iconUrl: 'https://maps.google.com/mapfiles/ms/icons/yellow-dot.png',
+    iconSize: [32,32]
+});
+const normalIcon = L.icon({
+    iconUrl: 'https://maps.google.com/mapfiles/ms/icons/blue-dot.png',
+    iconSize: [32,32]
+});
+
+// STORAGE
+let items = [];
+
+// ADD CARD
+function addCard(name, phone, service, quartier, isPremium) {
+
+    const [baselat, baselng] = getCoords(quartier);
+    const lat = baselat + (Math.random() - 0.5) * 0.005;
+    const lng = baselng + (Math.random() - 0.5) * 0.005;
+
+    const card = document.createElement("div");
+    card.className = "card" + (isPremium ? " premium" : "");
+
+    card.dataset.service = service;
+    card.dataset.quartier = quartier;
+
+    if(isPremium){
+        const d = new Date();
+        d.setDate(d.getDate() + 30);
+        card.dataset.exp = d.toISOString();
+    }
+
+    card.innerHTML = `
+<b>${name}</b> - ${service} - ${quartier}<br>
+${isPremium ? "⭐ Premium" : "Standard"}<br><br>
+
+<button class="reserv" onclick="reserve('${name}', '${phone}', '${service}', '${quartier}')">Réserver(sécurisé)</button>
+<button class="whatsapp" onclick="contact('${phone}', '${service}', '${quartier}')">WhatsApp</button>
+<button class="call" onclick="call('${phone}')">📞 Appeler</button>
+<button class="payment" onclick="pay('${name}', '${service}', '${quartier}')">💰</button>
+<button class="loc" onclick="locate(${lat},${lng})">📍</button>`;
+
+    // add to DOM
+    const container = document.getElementById("servicesList");
+
+    if(isPremium){
+        container.insertBefore(card, container.firstChild);
+    } else {
+        container.appendChild(card);
+    }
+
+    // marker
+    const marker = L.marker([lat,lng], {
+        icon: isPremium ? premiumIcon : normalIcon
+    }).addTo(map).bindPopup(name + " - " + service);
+
+    // store
+    items.push({card, marker});
+}
+
+// FUNCTIONS
+function locate(lat,lng){
+    map.setView([lat,lng], 17);
+}
+
+function getCoords(quartier){
+    const coords = {
+        "Hedzranawoé": [6.17171, 1.23718],
+        "Adidogomé": [6.12984, 1.21964],
+        "Tokoin": [6.14167, 1.20815],
+        "Bè": [6.14315, 1.24647],
+        "Kégué": [6.20300, 1.24168],
+        "Agoè": [6.24000, 1.19946],
+    }
+    return coords[quartier] || [6.135, 1.217];
+}
+
+function reserve(name, num, service, quartier){
+
+    let msg =
+    "Bonjour, je veux réserver un service%0A" +
+    "Prestataire: " + name + "%0A" +
+    "Numéro: " + num + "%0A" +
+    "Service: " + service + "%0A" +
+    "Quartier: " + quartier + "%0A%0A" +
+    "Je suis prêt à payer.";
+
+    window.open("https://wa.me/22893264869?text=" + msg, "_blank");
+}
+
+function contact(num, service, quartier){
+
+let message =
+"Bonjour 👋%0A" +
+"Je viens depuis ÀTonService.%0A%0A" +
+"Je suis intéressé par ton service de : " + service + "%0A" +
+"Localisation : " + quartier + "%0A%0A" +
+"Es-tu disponible maintenant ?";
+
+let url = "https://wa.me/" + num + "?text=" + message;
+
+window.open(url, "_blank");
+}
+
+function pay(name, service, quartier){
+
+    let msg =
+    "✅ Validation de service%0A" +
+    "Prestataire: " + name + "%0A" +
+    "Service: " + service + "%0A" +
+    "Quartier: " + quartier + "%0A%0A" +
+    "Le service a été effectué. Je souhaite procéder au paiement.";
+
+    window.open("https://wa.me/22893264869?text=" + msg, "_blank");
+}
+function call(num){
+    window.location.href = "tel:" + num;
+}
+
+// REGISTER
+function register(){
+    const n = document.getElementById("name").value.trim();
+    const p = document.getElementById("phone").value.trim();
+    const s = document.getElementById("service").value;
+    const q = document.getElementById("quartier").value.trim();
+    const pr = document.getElementById("premium").value;
+
+    if(!n || !p || !q){
+        alert("Remplis tous les champs");
+        return;
+    }
+
+    // MESSAGE CORRECT (sans retour à la ligne brut)
+    let message = 
+    "Nouvelle inscription !%0A" +
+    "Nom: " + n + "%0A" +
+    "Téléphone: " + p + "%0A" +
+    "Service: " + s + "%0A" +
+    "Quartier: " + q + "%0A" +
+    "Type: " + (pr == "1" ? "Premium" : "Standard");
+
+    // PAS de encodeURIComponent ici
+    let url = "https://wa.me/" + myNumber + "?text=" + message;
+
+    window.open(url, "_blank");
+
+    // ajout carte
+    addCard(n,p,s,q, pr == "1");
+
+    // reset
+    document.getElementById("name").value = "";
+    document.getElementById("phone").value = "";
+    document.getElementById("quartier").value = "";
+}
+
+// FILTER
+function filterCards(){
+    const search = document.getElementById("search").value.toLowerCase();
+    const fs = document.getElementById("filterService").value;
+    const fq = document.getElementById("filterQuartier").value;
+
+    items.forEach(obj => {
+        const text = obj.card.innerText.toLowerCase();
+        const service = obj.card.dataset.service;
+        const quartier = obj.card.dataset.quartier;
+
+        const show =
+            text.includes(search) &&
+            (!fs || service === fs) &&
+            (!fq || quartier === fq);
+
+        obj.card.style.display = show ? "block" : "none";
+        obj.marker.setOpacity(show ? 1 : 0);
+    });
+}
+
+// EXPIRATION
+function checkExpiration(){
+    const now = new Date();
+
+    items.forEach(obj => {
+        const exp = obj.card.dataset.exp;
+        if(exp && new Date(exp) < now){
+            obj.card.classList.remove("premium");
+        }
+    });
+}
+
+// DEMO DATA
+function seed(){
+    addCard("Kossi","22890000001","Nettoyage","Hedzranawoé",true);
+    addCard("Mensah","22890000002","Lavage","Adidogomé",false);
+    addCard("Sika","22890000004","Réparation","Bè",false);
+    addCard("ken", "22893264869","Courses","Heddzranawoé",true);
+    addCard("Hermann","22898242529","Nettoyage","Kégué",true);
+    addCard("Godwin","22897137226","Nettoyage","Kégué",false);
+    addCard("EGBARE","22870324626","Courses","Agoè",false);
+    addCard("Christian","22872395692","Nettoyage","Hedzranawoé",false);
+}
+
+// INIT
+window.onload = function(){
+    seed();
+    checkExpiration();
+};
+
+</script>
+
+</body>
+</html>
