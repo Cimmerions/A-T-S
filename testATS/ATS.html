@@ -730,14 +730,14 @@ function normalizeQuartier(value) {
         .trim()
         .toLowerCase()
 
-        // 🔥 enlève les accents
+        // enlève les accents
         .normalize("NFD")
         .replace(/[\u0300-\u036f]/g, "")
 
-        // 🔥 supprime espaces multiples
+        // supprime espaces multiples
         .replace(/\s+/g, " ")
 
-        // 🔥 première lettre majuscule uniquement
+        // première lettre majuscule uniquement
         .replace(/^./, char => char.toUpperCase());
 }
 
