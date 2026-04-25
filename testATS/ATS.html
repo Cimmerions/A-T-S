@@ -24,7 +24,7 @@
 .about-header h2 {
     margin: 0;
     font-size: 22px;
-    color: #0a7cff;
+    color: #0a7cff
 }
 
 .about-header p {
@@ -40,7 +40,7 @@
 
 .about-card {
     background: #0a7cff;
-    padding: 15px;
+    padding: 10px;
     border-radius: 12px;
     text-align: center;
     transition: 0.3s;
@@ -67,7 +67,7 @@
     color: #f5efef;
 }
 .main-header {
-    background: linear-gradient(135deg, #0a7cff, #00c6ff);
+    background: linear-gradient(135deg, #0a7cff, #00c6ff, #0a7cff);
     color: white;
     text-align: center;
     padding: 25px 15px;
@@ -98,39 +98,119 @@
 .signup-btn {
     width: 100%;
     padding: 15px;
-    font-size: 18px;
+    font-size: 17px;
     font-weight: bold;
     background: linear-gradient(135deg, #0a7cff, #00c6ff);
     color: white;
     border: none;
-    border-radius: 10px;
-    margin-top: 10px;
+    border-radius: 12px;
+    margin-top: 15px;
     cursor: pointer;
     transition: 0.3s;
 }
 
 .signup-btn:hover {
-    transform: scale(1.05);
-    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 0 8px 18px rgba(0,0,0,0.2);
 }
 
 .signup-btn:active {
     transform: scale(0.98);
 }
 
-body {font-family:sans-serif; margin:0; background:#f5f5f5;}
+body {
+    font-family:sans-serif;
+    margin:0;
+    background:#f5f5f5;
+    -webkit-tap-highlight-color: transparent;
+}
 header {background:#0a7cff; color:white; text-align:center; padding:15px;}
 .container {padding:15px;}
-.card {background:white;padding:12px;margin:10px 0;border-radius:20px;}
-.premium {border:3px solid gold;}
-button {margin:3px;padding:8px;border:none;border-radius:6px;color:white;cursor:pointer;}
-.reserv {background: #680aff;}
-.whatsapp{background:#25D366;}
-.payment{background:#ff6f00;}
-.loc{background:#555;}
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+.card {
+    background: white;
+    padding: 15px;
+    margin: 12px 0;
+    border-radius: 18px;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.08);
+    transition: all 0.25s ease;
+    position: relative;
+    overflow: hidden;
+    animation: fadeUp 0.4s ease;
+}
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 25px rgba(0,0,0,0.15);
+}
+.premium {
+    border: 2px solid gold;
+    background: linear-gradient(135deg, #fff8dc, #ffffff);
+}
+
+.premium::before {
+    content: "⭐PREMIUM ";
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 11px;
+    background: gold;
+    color: black;
+    padding: 4px 8px;
+    border-radius: 10px;
+    font-weight: bold;
+}
+
+button {
+    padding: 8px 10px;
+    border: none;
+    border-radius: 10px;
+    color: white;
+    cursor: pointer;
+
+    font-size: 13px;
+    font-weight: 500;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+
+    transition: all 0.2s ease;
+    touch-action: manipulation;
+}
+
+button:hover {
+    transform: translateY(-2px);
+    filter: brightness(1.1);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+}
+
+button:active {
+    transform: scale(0.95);
+}
+
+.whatsapp {
+    background: linear-gradient(135deg, #023617, #25D366, #023617);
+}
+.payment {
+    background: linear-gradient(135deg, #ff9800, #ff5722);
+}
+.loc {
+    background: linear-gradient(135deg, #666, #333);
+}
 #map{height:300px;border-radius:10px;margin-top:10px;}
 select,input{width:100%;padding:8px;margin:5px 0;}
-.call {background:#0a7cff;font-weight:bold;}
+.call {background: linear-gradient(135deg, #6a11cb, #2575fc);font-weight:bold;}
 .warning-box {
     background: #fff3cd;
     color: #856404;
@@ -141,8 +221,336 @@ select,input{width:100%;padding:8px;margin:5px 0;}
     font-size: 14px;
     line-height: 1.5;
     box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-    animation: fadeIn 0.8s ease;
+    cursor: pointer;
+    transition: 0.3s ease;
 }
+
+.warning-box:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+
+.warning-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: bold;
+}
+
+.warning-content {
+    margin-top: 10px;
+    overflow: hidden;
+    max-height: 0;
+    opacity: 0;
+    transition: all 0.3s ease;
+}
+
+.warning-box.active .warning-content {
+    max-height: 200px;
+    opacity: 1;
+}
+
+.arrow {
+    transition: 0.3s ease;
+}
+
+.warning-box.active .arrow {
+    transform: rotate(180deg);
+}
+
+/* ===== BLOCK PRESTATAIRE ===== */
+
+.pro-section {
+    background: #ffffff;
+    padding: 18px;
+    border-radius: 15px;
+    margin: 15px 0;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.06);
+    animation: fadeUp 0.4s ease;
+    transition: 0.25s ease;
+}
+
+.pro-section:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+
+/* Bloc gain argent */
+.pro-income {
+    background: linear-gradient(135deg, #e8f5e9, #ffffff);
+    border-left: 5px solid #4caf50;
+}
+
+.pro-income b {
+    color: #2e7d32;
+    font-size: 16px;
+}
+
+.pro-income ul {
+    padding-left: 18px;
+    margin: 10px 0;
+}
+
+.pro-income li {
+    margin-bottom: 5px;
+    font-size: 14px;
+    color: #444;
+}
+
+/* Bloc premium */
+.pro-premium {
+    background: linear-gradient(135deg, #fff8dc, #ffffff);
+    border-left: 5px solid gold;
+    margin-top: 12px;
+}
+
+.pro-premium b {
+    color: #c79c00;
+}
+
+.pro-premium ul {
+    padding-left: 18px;
+    margin-top: 8px;
+}
+
+.pro-premium li {
+    font-size: 14px;
+    margin-bottom: 4px;
+}
+
+.pro-accordion {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 15px;
+}
+
+/* Carte */
+.acc-card {
+    border-radius: 16px;
+    overflow: hidden;
+    cursor: pointer;
+    color: white;
+    position: relative;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+/* Hover */
+.acc-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+}
+
+/* Overlay pour lisibilité */
+.acc-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.45);
+    z-index: 0;
+}
+
+/* Contenu au-dessus */
+.acc-card * {
+    position: relative;
+    z-index: 1;
+}
+
+/* Dégradés différents pour chaque item */
+
+.acc-card:nth-child(1) {
+    background: linear-gradient(135deg, #203869, #acaba3, #203869);
+}
+
+.acc-card:nth-child(2) {
+    background: linear-gradient(135deg, #463f01, #acaba3, #463f01);
+}
+
+/* Titre */
+.acc-title {
+    padding: 15px;
+    font-weight: 600;
+    font-size: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Flèche animation */
+.acc-title span {
+    transition: transform 0.3s ease;
+}
+
+/* Contenu */
+.acc-content {
+    max-height: 0;
+    overflow: hidden;
+    padding: 0 15px;
+    font-size: 13px;
+    line-height: 1.5;
+    transition: max-height 0.35s ease, padding 0.3s ease;
+}
+
+/* Actif (ouvert) */
+.acc-card.active .acc-content {
+    max-height: 200px;
+    padding: 10px 15px 15px;
+}
+
+.acc-card.active .acc-title span {
+    transform: rotate(180deg);
+}
+
+
+/* Mobile optimisation */
+@media (max-width: 600px) {
+    .acc-title {
+        font-size: 14px;
+        padding: 12px;
+    }
+
+    .acc-content {
+        font-size: 12px;
+    }
+}
+
+.how-it-works {
+    background: #e3f2fd;
+    padding: 15px;
+    margin: 15px;
+    border-radius: 12px;
+    font-size: 14px;
+    line-height: 1.5;
+    border-left: 5px solid #0a7cff;
+    transition: 0.25s ease;
+}
+
+.how-it-works:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+
+/* ===== MODAL ===== */
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 999;
+    inset: 0;
+    background: rgba(0,0,0,0.6);
+    backdrop-filter: blur(3px);
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-box {
+    background: white;
+    width: 90%;
+    max-width: 420px;
+    border-radius: 18px;
+    padding: 18px;
+    box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+    animation: fadeUp 0.3s ease;
+}
+
+/* header */
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.modal-header h3 {
+    margin: 0;
+    color: #0a7cff;
+}
+
+.close-btn {
+    cursor: pointer;
+    font-size: 18px;
+}
+
+/* body */
+.modal-body {
+    margin-top: 10px;
+    font-size: 13px;
+    color: #444;
+    max-height: 180px;
+    overflow-y: auto;
+    line-height: 1.5;
+}
+
+/* footer */
+.modal-footer {
+    margin-top: 15px;
+}
+
+.checkbox {
+    font-size: 13px;
+    display: flex;
+    gap: 6px;
+    align-items: center;
+}
+
+/* bouton modal */
+#confirmBtn {
+    width: 100%;
+    margin-top: 10px;
+    padding: 12px;
+    border-radius: 10px;
+    border: none;
+    background: linear-gradient(135deg, #0a7cff, #00c6ff);
+    color: white;
+    font-weight: bold;
+    opacity: 0.5;
+    cursor: not-allowed;
+    transition: 0.3s;
+}
+
+#confirmBtn.active {
+    opacity: 1;
+    cursor: pointer;
+}
+
+/* bouton principal disabled */
+.signup-btn:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+    box-shadow: none;
+}
+
+#toast-container{
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.toast{
+    min-width: 250px;
+    max-width: 90vw;
+    padding: 12px 15px;
+    border-radius: 12px;
+    color: white;
+    font-size: 14px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    animation: slideUp 0.3s ease;
+}
+
+.toast.success{ background: linear-gradient(135deg,#0a7cff,#00c6ff); }
+.toast.error{ background: linear-gradient(135deg,#ff4d4d,#ff1a1a); }
+.toast.info{ background: linear-gradient(135deg,#333,#666); }
+
+@keyframes slideUp{
+    from{opacity:0; transform:translateY(20px);}
+    to{opacity:1; transform:translateY(0);}
+}
+
 </style>
 </head>
 
@@ -153,14 +561,22 @@ select,input{width:100%;padding:8px;margin:5px 0;}
     <p>Trouve un prestataire rapidement autour de toi</p>
 </header>
 
-<div class="warning-box">
-    ⚠️ <b>Important :</b> Pour votre sécurité, les paiements s’effectuent uniquement :
-    <br>• via le bouton 💰 paiement sur la plateforme
-    <br>• ou en appelant directement le numéro officiel (93264869)
-    <br><br>
-    ❌ Ne payez jamais un prestataire en dehors de ces moyens.
-</div>
+<div class="warning-box" onclick="toggleWarning(this)">
+    
+    <div class="warning-title">
+        ⚠️ <b>Important : Pour un paiement sécurisé</b>
+        <span class="arrow">▼</span>
+    </div>
 
+    <div class="warning-content">
+        • Discutez directement avec le prestataire<br>
+        • Payez uniquement après le service<br>
+        • En cliquant sur le bouton 💰 Paiement sécurisé<br>
+        • Transactions uniquement via ÀTonService (Mobile Money)<br><br>
+        ❌ Par sécurité, ne payez jamais directement un prestataire! 
+    </div>
+
+</div>
 <section class="about-pro">
 
     <div class="about-header">
@@ -214,11 +630,59 @@ select,input{width:100%;padding:8px;margin:5px 0;}
 <option>Adidogomé</option>
 <option>Tokoin</option>
 <option>Bè</option>
+<option>Caisse</option>
 </select>
+
+<div class="pro-accordion">
+    <!-- TUTO -->
+    <div class="acc-card" onclick="toggleAcc(this)">
+        <div class="acc-title">
+            📌 Comment ça marche ?
+             <span>▼</span>
+        </div>
+
+        <div class="acc-content">
+             1️⃣ Choisis un prestataire<br>
+             2️⃣ Discute sur WhatsApp<br>
+             3️⃣ Paye uniquement après le service
+        </div>
+    </div>
+</div>
 
 <div id="servicesList"></div>
 
 <div id="map"></div>
+
+<div class="pro-accordion">
+
+    <!-- ITEM 1 -->
+    <div class="acc-card" onclick="toggleAcc(this)">
+        <div class="acc-title">
+            👇 Commencer maintenant
+            <span>▼</span>
+        </div>
+
+        <div class="acc-content">
+            🔍 Trouve des clients dans ton quartier<br>
+            📲 Reçois des demandes directement sur ton téléphone<br><br>
+            📈 Jusqu’à <b>5 000 FCFA / jour</b>
+        </div>
+    </div>
+
+    <!-- ITEM 2 -->
+    <div class="acc-card" onclick="toggleAcc(this)">
+        <div class="acc-title">
+            ⭐ Pourquoi Premium ?
+            <span>▼</span>
+        </div>
+
+        <div class="acc-content">
+            Tes chances d’être contacté sont multipliées.<br><br>
+            <div class="pro-urgent">⏱️ Les places Premium sont limitées par quartier</div>
+        </div>
+    </div>
+
+</div>
 
 <h3>Proposer tes services</h3>
 
@@ -233,26 +697,83 @@ select,input{width:100%;padding:8px;margin:5px 0;}
 <option>Réparation</option>
 </select>
 
-<input id="quartier" placeholder="Quartier">
+<input id="quartier" placeholder="Ex: Hedzranawoé, Kégué...">
 
 <select id="premium">
 <option value="0">Standard (gratuit)</option>
-<option value="1">Premium (500 FCFA / 30 jours)</option>
+<option value="1">
+⭐ PREMIUM (500 FCFA)
+• Apparaît en premier
+• +3x plus de visibilité
+• Badge de confiance
+</option>
 </select>
 
-<button class="signup-btn" onclick="register()">S'inscrire</button>
+<button id="signupBtn" class="signup-btn" disabled>S'inscrire</button>
 
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 <script>
+
+const supabaseUrl = "https://ycoloekqdbytrtffqjzp.supabase.co";
+const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inljb2xvZWtxZGJ5dHJ0ZmZxanpwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzY2MDM0OTYsImV4cCI6MjA5MjE3OTQ5Nn0.X3WV9UwOcPkb0dZtVgFfu4vuhPJF_FIQRjeOdyiu8r4";
+const geoCache = {};
+const db = window.supabase.createClient(supabaseUrl, supabaseKey);
+
+function normalizeQuartier(value) {
+    if (!value) return "";
+
+    return value
+        .trim()
+        .toLowerCase()
+
+        // 🔥 enlève les accents
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+
+        // 🔥 supprime espaces multiples
+        .replace(/\s+/g, " ")
+
+        // 🔥 première lettre majuscule uniquement
+        .replace(/^./, char => char.toUpperCase());
+}
+
+function updateQuartierFilter(data){
+    const select = document.getElementById("filterQuartier");
+
+    // récupérer quartiers uniques
+    const quartiers = [
+    ...new Set(
+        data.map(s => normalizeQuartier(s.quartier))
+    )
+];
+
+    // reset options sauf "Tous"
+    select.innerHTML = `<option value="">Tous quartiers</option>`;
+
+    quartiers.forEach(q => {
+        const option = document.createElement("option");
+        option.value = q;
+        option.textContent = q;
+        select.appendChild(option);
+    });
+}
 
 // CONFIG
 const myNumber = "22893264869"; // TON NUMERO
 
 // INIT MAP
-const map = L.map('map').setView([6.135, 1.217], 14);
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+let map;
+
+function initMap(){
+    map = L.map('map').setView([6.135, 1.217], 14);
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png')
+        .addTo(map);
+}
 
 // ICONS
 const premiumIcon = L.icon({
@@ -268,33 +789,51 @@ const normalIcon = L.icon({
 let items = [];
 
 // ADD CARD
-function addCard(name, phone, service, quartier, isPremium) {
+async function addCard(name, phone, service, quartier, isPremium) {
 
-    const [baselat, baselng] = getCoords(quartier);
-    const lat = baselat + (Math.random() - 0.5) * 0.005;
-    const lng = baselng + (Math.random() - 0.5) * 0.005;
+const geoCache = {};
+const coords = await geocode(quartier);
+const [baselat, baselng] = coords;
 
-    const card = document.createElement("div");
-    card.className = "card" + (isPremium ? " premium" : "");
+const lat = baselat + (Math.random() - 0.5) * 0.005;
+const lng = baselng + (Math.random() - 0.5) * 0.005;
 
-    card.dataset.service = service;
-    card.dataset.quartier = quartier;
+const card = document.createElement("div");
+card.className = "card" + (isPremium === true ? " premium" : "");
 
-    if(isPremium){
-        const d = new Date();
-        d.setDate(d.getDate() + 30);
-        card.dataset.exp = d.toISOString();
-    }
+card.dataset.service = service;
+card.dataset.quartier = normalizeQuartier(quartier);
 
-    card.innerHTML = `
-<b>${name}</b> - ${service} - ${quartier}<br>
-${isPremium ? "⭐ Premium" : "Standard"}<br><br>
+if(isPremium === true){
+    const d = new Date();
+    d.setDate(d.getDate() + 30);
+    card.dataset.exp = d.toISOString();
+}
 
-<button class="reserv" onclick="reserve('${name}', '${phone}', '${service}', '${quartier}')">Réserver(sécurisé)</button>
-<button class="whatsapp" onclick="contact('${phone}', '${service}', '${quartier}')">WhatsApp</button>
-<button class="call" onclick="call('${phone}')">📞 Appeler</button>
-<button class="payment" onclick="pay('${name}', '${service}', '${quartier}')">💰</button>
-<button class="loc" onclick="locate(${lat},${lng})">📍</button>`;
+card.innerHTML = `
+<div style="font-weight:bold; font-size:16px;">
+${name}
+</div>
+
+<div style="font-size:13px; color:#555; margin:5px 0;">
+${service} • ${quartier}
+</div>
+
+<div style="display:flex; gap:6px; margin-top:8px; flex-wrap:wrap;">
+<button class="whatsapp" onclick="contact('${phone}', '${service}', '${quartier}')">
+💬 WhatsApp
+</button>
+<button class="call" onclick="call('${phone}')">
+📞 Appeler
+</button>
+<button class="payment" onclick="securePay('${name}','${service}','${quartier}')">
+💰 Paiement sécurisé
+</button>
+<button class="loc" onclick="locate(${lat},${lng})">
+📍 Localiser
+</button>
+</div>
+`;
 
     // add to DOM
     const container = document.getElementById("servicesList");
@@ -307,7 +846,7 @@ ${isPremium ? "⭐ Premium" : "Standard"}<br><br>
 
     // marker
     const marker = L.marker([lat,lng], {
-        icon: isPremium ? premiumIcon : normalIcon
+        icon: isPremium === true ? premiumIcon : normalIcon
     }).addTo(map).bindPopup(name + " - " + service);
 
     // store
@@ -327,6 +866,7 @@ function getCoords(quartier){
         "Bè": [6.14315, 1.24647],
         "Kégué": [6.20300, 1.24168],
         "Agoè": [6.24000, 1.19946],
+        "Caisse": [6.17315, 1.23192],
     }
     return coords[quartier] || [6.135, 1.217];
 }
@@ -358,77 +898,268 @@ let url = "https://wa.me/" + num + "?text=" + message;
 window.open(url, "_blank");
 }
 
-function pay(name, service, quartier){
+function securePay(name, service, quartier){
 
-    let msg =
-    "✅ Validation de service%0A" +
-    "Prestataire: " + name + "%0A" +
-    "Service: " + service + "%0A" +
-    "Quartier: " + quartier + "%0A%0A" +
-    "Le service a été effectué. Je souhaite procéder au paiement.";
+let msg =
+"Paiement sécurisé ÀTonService%0A%0A" +
+"Prestataire: " + name + "%0A" +
+"Service: " + service + "%0A" +
+"Quartier: " + quartier + "%0A%0A" +
+"Je souhaite effectuer le paiement.";
 
-    window.open("https://wa.me/22893264869?text=" + msg, "_blank");
+let url = "https://wa.me/22893264869?text=" + msg;
+
+window.open(url, "_blank");
 }
+
 function call(num){
     window.location.href = "tel:" + num;
 }
 
-// REGISTER
-function register(){
-    const n = document.getElementById("name").value.trim();
-    const p = document.getElementById("phone").value.trim();
-    const s = document.getElementById("service").value;
-    const q = document.getElementById("quartier").value.trim();
-    const pr = document.getElementById("premium").value;
+function toggleWarning(el) {
+    el.classList.toggle("active");
+}
 
-    if(!n || !p || !q){
-        alert("Remplis tous les champs");
+function toggleAcc(element) {
+    element.classList.toggle("active");
+}
+
+// TOAST
+function showToast(message, type = "info") {
+    const container = document.getElementById("toast-container");
+
+    const toast = document.createElement("div");
+    toast.className = `toast ${type}`;
+    toast.innerText = message;
+
+    container.appendChild(toast);
+
+    setTimeout(() => {
+        toast.style.opacity = "0";
+        toast.style.transform = "translateY(20px)";
+        setTimeout(() => toast.remove(), 300);
+    }, 2500);
+}
+
+// LOADSERVICE
+async function loadServices() {
+
+const { data, error } = await db
+    .from("services")
+    .select("*")
+    .order("id", { ascending: false });
+
+    if (error) {
+    console.log("ERROR:", error);
+    return;
+}
+
+document.getElementById("servicesList").innerHTML = "";
+items = [];
+
+data.forEach(s => {
+    addCard(s.name, s.phone, s.service, s.quartier, s.premium);
+});
+
+updateQuartierFilter(data);
+
+}
+
+// GEOCODE(nominatim)
+async function geocode(quartier){
+
+if(geoCache[quartier]){
+    return geoCache[quartier];
+}
+
+const res = await fetch(
+    `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(normalizeQuartier(quartier) + " Lomé Togo")}`
+);
+
+const data = await res.json();
+
+const result = data.length > 0
+    ? [parseFloat(data[0].lat), parseFloat(data[0].lon)]
+    : [6.135, 1.217];
+
+geoCache[quartier] = result;
+
+return result;
+}
+
+// REGISTER
+async function register() {
+
+const nameInput = document.getElementById("name");
+const phoneInput = document.getElementById("phone");
+const quartierInput = document.getElementById("quartier");
+const serviceInput = document.getElementById("service");
+const premiumInput = document.getElementById("premium");
+const btn = document.getElementById("signupBtn");
+
+const name = nameInput.value.trim();
+const phone = phoneInput.value.trim();
+const service = serviceInput.value;
+const quartier = normalizeQuartier(quartierInput.value);
+const premium = premiumInput.value === "1" ? 1 : 0;
+
+if (!name || !phone || !quartier) {
+    alert("Veuillez remplir tous les champs!");
+    return;
+}
+
+btn.innerText = "⏳ Enregistrement...";
+btn.disabled = true;
+
+try {
+
+    const { error } = await db
+        .from("services")
+        .insert([{ name, phone, service, quartier, premium }]);
+
+    if (error) {
+        console.log("SUPABASE ERROR:", error);
+        alert(error.message);
         return;
     }
 
-    // MESSAGE CORRECT (sans retour à la ligne brut)
-    let message = 
-    "Nouvelle inscription !%0A" +
-    "Nom: " + n + "%0A" +
-    "Téléphone: " + p + "%0A" +
-    "Service: " + s + "%0A" +
-    "Quartier: " + q + "%0A" +
-    "Type: " + (pr == "1" ? "Premium" : "Standard");
+    await loadServices();
 
-    // PAS de encodeURIComponent ici
-    let url = "https://wa.me/" + myNumber + "?text=" + message;
+    window.open(
+        "https://wa.me/" + myNumber +
+        "?text=Nouvelle inscription " + name,
+        "_blank"
+    );
 
-    window.open(url, "_blank");
+    alert("✅ Inscription réussie");
 
-    // ajout carte
-    addCard(n,p,s,q, pr == "1");
+    nameInput.value = "";
+    phoneInput.value = "";
+    quartierInput.value = "";
+    serviceInput.selectedIndex = 0;
+    premiumInput.selectedIndex = 0;
 
-    // reset
-    document.getElementById("name").value = "";
-    document.getElementById("phone").value = "";
-    document.getElementById("quartier").value = "";
+} catch (err) {
+    console.error("REGISTER FAIL:", err);
+    alert("Erreur réseau ou Supabase");
+} finally {
+    btn.innerText = "S'inscrire";
+    btn.disabled = false;
+}
 }
 
 // FILTER
 function filterCards(){
     const search = document.getElementById("search").value.toLowerCase();
     const fs = document.getElementById("filterService").value;
-    const fq = document.getElementById("filterQuartier").value;
+    const fq = normalizeQuartier(
+    document.getElementById("filterQuartier").value
+);
 
     items.forEach(obj => {
         const text = obj.card.innerText.toLowerCase();
         const service = obj.card.dataset.service;
-        const quartier = obj.card.dataset.quartier;
+        const quartier = normalizeQuartier(obj.card.dataset.quartier);
 
         const show =
             text.includes(search) &&
             (!fs || service === fs) &&
             (!fq || quartier === fq);
 
-        obj.card.style.display = show ? "block" : "none";
+            obj.card.style.display = show ? "" : "none";
         obj.marker.setOpacity(show ? 1 : 0);
     });
 }
+
+document.addEventListener("DOMContentLoaded", () => {
+
+const name = document.getElementById("name");
+const phone = document.getElementById("phone");
+const quartier = document.getElementById("quartier");
+const signupBtn = document.getElementById("signupBtn");
+
+const modal = document.getElementById("policyModal");
+const checkbox = document.getElementById("acceptPolicy");
+const confirmBtn = document.getElementById("confirmBtn");
+
+// ===== VALIDATION =====
+function checkForm(){
+    const valid =
+        name.value.trim() &&
+        phone.value.trim() &&
+        quartier.value.trim();
+
+    signupBtn.disabled = !valid;
+}
+
+name.addEventListener("input", checkForm);
+phone.addEventListener("input", checkForm);
+quartier.addEventListener("input", checkForm);
+
+checkForm();
+
+// ===== OPEN MODAL =====
+signupBtn.addEventListener("click", () => {
+
+    if(signupBtn.disabled){
+        alert("Remplis tous les champs");
+        return;
+    }
+
+    modal.style.display = "flex";
+});
+
+// ===== CLOSE MODAL =====
+window.closeModal = function(){
+    modal.style.display = "none";
+
+    checkbox.checked = false;
+    confirmBtn.disabled = true;
+    confirmBtn.classList.remove("active");
+};
+
+// ===== CHECKBOX =====
+checkbox.addEventListener("change", () => {
+    confirmBtn.disabled = !checkbox.checked;
+    confirmBtn.classList.toggle("active", checkbox.checked);
+});
+
+// ===== CONFIRM =====
+confirmBtn.addEventListener("click", async () => {
+
+try {
+    closeModal(); // 🔥 IMPORTANT : immédiat
+
+    await register(); // backend
+
+} catch (err) {
+    console.error(err);
+    alert("Erreur lors de l'inscription");
+} finally {
+    resetModalState(); // sécurité
+}
+
+});
+});
+
+// RESET MODAL
+function resetModalState(){
+
+const checkbox = document.getElementById("acceptPolicy");
+const confirmBtn = document.getElementById("confirmBtn");
+
+checkbox.checked = false;
+
+confirmBtn.disabled = true;
+confirmBtn.classList.remove("active");
+confirmBtn.innerText = "Continuer";
+}
+
+// ===== CLICK OUTSIDE =====
+window.addEventListener("pageshow", () => {
+    closeModal();
+});
+
 
 // EXPIRATION
 function checkExpiration(){
@@ -437,8 +1168,9 @@ function checkExpiration(){
     items.forEach(obj => {
         const exp = obj.card.dataset.exp;
         if(exp && new Date(exp) < now){
-            obj.card.classList.remove("premium");
-        }
+    obj.card.classList.remove("premium");
+    obj.marker.setIcon(normalIcon);
+}
     });
 }
 
@@ -447,20 +1179,81 @@ function seed(){
     addCard("Kossi","22890000001","Nettoyage","Hedzranawoé",true);
     addCard("Mensah","22890000002","Lavage","Adidogomé",false);
     addCard("Sika","22890000004","Réparation","Bè",false);
-    addCard("ken", "22893264869","Courses","Heddzranawoé",true);
+    addCard("ken", "22893264869","Courses","Hedzranawoé",true);
     addCard("Hermann","22898242529","Nettoyage","Kégué",true);
     addCard("Godwin","22897137226","Nettoyage","Kégué",false);
     addCard("EGBARE","22870324626","Courses","Agoè",false);
     addCard("Christian","22872395692","Nettoyage","Hedzranawoé",false);
+    addCard("Essi","22891245775","Nettoyage","Caisse millenium cite oua",false);
 }
 
 // INIT
-window.onload = function(){
-    seed();
-    checkExpiration();
+window.onload = async function(){
+    initMap();       
+    await loadServices(); 
+    checkForm(); 
 };
 
 </script>
 
+<div id="policyModal" class="modal">
+
+    <div class="modal-box">
+  
+      <div class="modal-header">
+        <h3>📄 Politique d’utilisation</h3>
+        <span class="close-btn" onclick="closeModal()">✖</span>
+      </div>
+  
+      <div class="modal-body">
+  
+        <p><b>ÀTonService</b> est une plateforme de mise en relation.</p>
+  
+        <p><b>Données :</b><br>
+            • Nom / pseudo, numéro, quartier<br>
+            • Utilisées pour afficher les services sur la carte<br>
+            • Jamais vendues</p>
+            
+            <p><b>Contact :</b><br>
+            • Mise en relation via WhatsApp<br>
+            • Aucune conversation stockée</p>
+            
+            <p><b>Visibilité :</b><br>
+            • Profil visible par les autres utilisateurs<br>
+            • Quartier et service affichés</p>
+            
+            <p><b>Paiement :</b><br>
+            • Paiement via la plateforme<br>
+            • Commission de <b>10%</b><br>
+            • Reste versé au prestataire</br>
+            • Transactions sécurisées</p>
+            
+            <p><b>Sécurité :</b><br>
+            • Données sécurisées via Supabase<br>
+            • Ne partagez pas vos accès<br>
+            • Utilisation à vos risques</p>
+            
+            <p><b>Vos droits :</b><br>
+            • Modification ou suppression sur demande<br>
+            • Utilisation du site = acceptation</p>
+  
+      </div>
+  
+      <div class="modal-footer">
+  
+        <label class="checkbox">
+          <input type="checkbox" id="acceptPolicy">
+          J’ai lu et accepté
+        </label>
+  
+        <button id="confirmBtn" disabled>Continuer</button>
+  
+      </div>
+  
+    </div>
+  
+  </div>
+
+<div id="toast-container"></div>  
 </body>
 </html>
