@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ÀTonService</title>
-<link rel="shortcut icon" href="images_ATS/favicon.png" type="image"/>
+<link rel="shortcut icon" href="images_ATS/favicon.png" type="image/png"/>
 
 <link rel="stylesheet" href="all.css"/>
 <script defer src="all.js"></script> 
@@ -888,16 +888,16 @@ select,input{width:100%;padding:8px;margin:5px 0;}
 <div class="warning-box" onclick="toggleWarning(this)">
     
     <div class="warning-title">
-        ⚠️ <b>Important : Pour un paiement sécurisé</b>
+        <i class="fa-solid fa-triangle-exclamation"></i> <b>Important : Pour un paiement sécurisé</b>
         <span class="arrow">▼</span>
     </div>
 
     <div class="warning-content">
         • Discutez directement avec le prestataire<br>
         • Payez uniquement après le service<br>
-        • En cliquant sur le bouton 💰 Paiement sécurisé<br>
+        • En cliquant sur le bouton <i class="fa-solid fa-wallet"></i> Paiement sécurisé<br>
         • Transactions uniquement via ÀTonService (Mobile Money)<br><br>
-        ❌ Par sécurité, ne payez jamais directement un prestataire! 
+        <i class="fa-solid fa-circle-xmark" style="color: red;"></i> Par sécurité, ne payez jamais directement un prestataire! 
     </div>
 
 </div>
@@ -913,19 +913,19 @@ select,input{width:100%;padding:8px;margin:5px 0;}
     <div class="about-grid">
   
       <div class="about-card">
-        <div class="icon">⚡</div>
+        <i class="fa-solid fa-rocket fa-xl" style="color:gold"></i>
         <h4>Rapide</h4>
         <p>Trouve un prestataire en quelques secondes.</p>
       </div>
   
       <div class="about-card">
-        <div class="icon">📍</div>
+        <i class="fa-solid fa-map-pin fa-xl" style="color: red;"></i>
         <h4>Local</h4>
         <p>Des services proches de toi, dans ton quartier.</p>
       </div>
   
       <div class="about-card">
-        <div class="icon">🤝</div>
+        <i class="fa-solid fa-handshake fa-xl" style="color: whitesmoke;"></i>
         <h4>Fiable</h4>
         <p>Des prestataires vérifiés et disponibles.</p>
       </div>
@@ -935,7 +935,7 @@ select,input{width:100%;padding:8px;margin:5px 0;}
   </section>
 
 <div class="header-text">
-    <h2>Bonjour 👋</h2>
+    <h2>Bonjour <i class="fa-solid fa-hand-peace"></i> </h2>
     <p>Que voulez-vous faire aujourd'hui ?</p>
 </div>
 
@@ -966,7 +966,7 @@ select,input{width:100%;padding:8px;margin:5px 0;}
     <!-- TUTO -->
     <div class="acc-card" onclick="toggleAcc(this)">
         <div class="acc-title">
-            📌 Comment ça marche ?
+            <i class="fa-solid fa-thumbtack" style="color: red;"></i> Comment ça marche ?
              <span>▼</span>
         </div>
 
@@ -990,27 +990,27 @@ select,input{width:100%;padding:8px;margin:5px 0;}
     <!-- ITEM 1 -->
     <div class="acc-card" onclick="toggleAcc(this)">
         <div class="acc-title">
-            👇 Commencer maintenant
+            <i class="fa-solid fa-hand-point-down" style="color: rgba(209, 209, 223, 0.897);"></i> Commencer maintenant
             <span>▼</span>
         </div>
 
         <div class="acc-content">
-            🔍 Trouve des clients dans ton quartier<br>
-            📲 Reçois des demandes directement sur ton téléphone<br><br>
-            📈 Jusqu’à <b>5 000 FCFA / jour</b>
+            <i class="fa-solid fa-magnifying-glass"></i> Trouve des clients dans ton quartier<br>
+            <i class="fa-solid fa-mobile-vibrate"></i> Reçois des demandes directement sur ton téléphone<br><br>
+            <i class="fa-solid fa-arrow-trend-up" style="color: #0a7cff;"></i> Jusqu’à <b>5 000 FCFA / jour</b>
         </div>
     </div>
 
     <!-- ITEM 2 -->
     <div class="acc-card" onclick="toggleAcc(this)">
         <div class="acc-title">
-            ⭐ Pourquoi Premium ?
+            <i class="fa-solid fa-star" style="color: gold;"></i> Pourquoi Premium ?
             <span>▼</span>
         </div>
 
         <div class="acc-content">
-            Tes chances d’être contacté sont multipliées.<br><br>
-            <div class="pro-urgent">⏱️ Les places Premium sont limitées par quartier</div>
+            <i class="fa-solid fa-calculator"></i> Tes chances d’être contacté sont multipliées.<br><br>
+            <div class="pro-urgent"> <i class="fa-solid fa-stopwatch" style="color: red;"></i> Les places Premium sont limitées par quartier</div>
             <small style="color:#777;">Paiement après obtention du premier client</small>
         </div>
     </div>
@@ -1152,16 +1152,16 @@ ${service} • ${quartier}
 
 <div style="display:flex; gap:6px; margin-top:8px; flex-wrap:wrap;">
 <button class="whatsapp" onclick="contact('${phone}', '${service}', '${quartier}')">
-💬 WhatsApp
+<i class="fa-brands fa-whatsapp"></i> WhatsApp
 </button>
 <button class="call" onclick="call('${phone}')">
-📞 Appeler
+<i class="fa-solid fa-phone"></i> Appeler
 </button>
 <button class="payment" onclick="securePay('${name}','${service}','${quartier}')">
-💰 Paiement sécurisé
+<i class="fa-solid fa-wallet"></i> Paiement sécurisé
 </button>
 <button class="loc" onclick="locate(${lat},${lng})">
-📍 Localiser
+<i class="fa-solid fa-location-dot"></i> Localiser
 </button>
 </div>
 `;
