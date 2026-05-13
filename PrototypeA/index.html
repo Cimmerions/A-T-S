@@ -1,0 +1,311 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ÀTonService</title>
+<link rel="shortcut icon" href="images_ATS/icons/Favicon2.png" type="image/png"/>
+
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
+<link rel="stylesheet" href="css/all.css"/>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+<script defer src="js/all.js"></script> 
+
+</head>
+
+<body>
+
+    <header class="main-header">
+        <h1>ÀTonService</h1>
+        <p>Trouve un prestataire rapidement autour de toi</p>
+    </header>
+    
+    <div class="warning-box" onclick="toggleWarning(this)">
+        
+        <div class="warning-title">
+            <i class="fa-solid fa-triangle-exclamation"></i> <b>Important : Pour un paiement sécurisé</b>
+            <span class="arrow">▼</span>
+        </div>
+    
+        <div class="warning-content">
+            • Discutez directement avec le prestataire<br>
+            • Payez uniquement après le service<br>
+            • En cliquant sur le bouton <i class="fa-solid fa-wallet" style="color: goldenrod;"></i> Paiement sécurisé<br>
+            • Transactions uniquement via ÀTonService (Mobile Money)<br><br>
+            <i class="fa-solid fa-circle-xmark" style="color: red;"></i> Par sécurité, ne payez jamais directement un prestataire! 
+        </div>
+    
+    </div>
+    <section class="about-pro">
+    
+        <div class="about-header">
+          <h2>Des services fiables, près de chez vous</h2>
+          <p>
+            ÀTonService connecte rapidement les habitants avec des prestataires disponibles dans leur quartier.
+          </p>
+        </div>
+      
+        <div class="about-grid">
+      
+          <div class="about-card">
+            <i class="fa-solid fa-rocket fa-xl" style="color:gold"></i>
+            <h4>Rapide</h4>
+            <p>Trouve un prestataire en quelques secondes.</p>
+          </div>
+      
+          <div class="about-card">
+            <i class="fa-solid fa-map-pin fa-xl" style="color: red;"></i>
+            <h4>Local</h4>
+            <p>Des services proches de toi, dans ton quartier.</p>
+          </div>
+      
+          <div class="about-card">
+            <i class="fa-solid fa-handshake fa-xl" style="color: whitesmoke;"></i>
+            <h4>Fiable</h4>
+            <p>Des prestataires vérifiés et disponibles.</p>
+          </div>
+      
+        </div>
+      
+      </section>
+    
+    <div class="header-text">
+        <h2>Bonjour <i class="fa-solid fa-hand-peace"></i> </h2>
+        <p>Que voulez-vous faire aujourd'hui ?</p>
+    </div>
+    
+    <div class="container">
+    
+    <input id="search" placeholder="Rechercher..." onkeyup="filterCards()">
+    
+    <select id="filterService" onchange="filterCards()">
+    <option value="">Tous services</option>
+    <option>Nettoyage</option>
+    <option>Cuisine</option>
+    <option>Lavage</option>
+    <option>Courses</option>
+    <option>Réparation</option>
+    </select>
+    
+    <select id="filterQuartier" onchange="filterCards()">
+    <option value="">Tous quartiers</option>
+    <option>Hedzranawoé</option>
+    <option>Kégué</option>
+    <option>Adidogomé</option>
+    <option>Tokoin</option>
+    <option>Bè</option>
+    <option>Caisse</option>
+    </select>
+    
+    <div class="pro-accordion">
+        <!-- TUTO -->
+        <div class="acc-card" onclick="toggleAcc(this)">
+            <div class="acc-title">
+                <i class="fa-solid fa-thumbtack" style="color: red;"></i> Comment ça marche ?
+                 <span>▼</span>
+            </div>
+    
+            <div class="acc-content">
+                <i class="fa-solid fa-1"></i>
+                  Choisis un prestataire<br>
+                <i class="fa-solid fa-2"></i>  
+                  Discute sur WhatsApp<br>
+                <i class="fa-solid fa-3"></i> 
+                  Paye uniquement après le service
+            </div>
+        </div>
+    </div>
+    
+    <div id="servicesList"></div>
+    
+    <div id="map"></div>
+    
+    <div class="pro-accordion">
+    
+        <!-- ITEM 1 -->
+        <div class="acc-card" onclick="toggleAcc(this)">
+            <div class="acc-title">
+                <i class="fa-solid fa-hand-point-down" style="color: rgba(209, 209, 223, 0.897);"></i> Commencer maintenant
+                <span>▼</span>
+            </div>
+    
+            <div class="acc-content">
+                <i class="fa-solid fa-magnifying-glass"></i> Trouve des clients dans ton quartier<br>
+                <i class="fa-solid fa-mobile-vibrate"></i> Reçois des demandes directement sur ton téléphone<br><br>
+                <i class="fa-solid fa-arrow-trend-up" style="color: #0a7cff;"></i> Jusqu’à <b>5 000 FCFA / jour</b>
+            </div>
+        </div>
+    
+        <!-- ITEM 2 -->
+        <div class="acc-card" onclick="toggleAcc(this)">
+            <div class="acc-title">
+                <i class="fa-solid fa-star" style="color: gold;"></i> Pourquoi Premium ?
+                <span>▼</span>
+            </div>
+    
+            <div class="acc-content">
+                <i class="fa-solid fa-calculator"></i> Tes chances d’être contacté sont multipliées.<br><br>
+                <div class="pro-urgent"> <i class="fa-solid fa-stopwatch" style="color: red;"></i> Les places Premium sont limitées par quartier</div>
+                <small style="color:#777;">Paiement après obtention du premier client</small>
+            </div>
+        </div>
+    
+    </div>
+    
+    <h3>Proposer tes services</h3>
+    
+    <input id="name" placeholder="Nom">
+    <input id="phone" placeholder="Téléphone">
+    
+    <select id="service">
+    <option>Nettoyage</option>
+    <option>Cuisine</option>
+    <option>Lavage</option>
+    <option>Courses</option>
+    <option>Réparation</option>
+    </select>
+    
+    <input id="quartier" placeholder="Ex: Hedzranawoé, Kégué...">
+    
+    <select id="premium">
+    <option value="0">Standard (gratuit)</option>
+    <option value="1">
+    ⭐ PREMIUM (500 FCFA)
+    | Passe Premium et sois contacté en priorité par les clients près de toi.
+    </option>
+    </select>
+    
+    <button id="signupBtn" class="signup-btn" disabled>S'inscrire</button>
+    
+    </div>
+    
+    <!-- POLICY MODAL -->
+    <div id="policyModal" class="modal">
+
+    <div class="modal-box">
+  
+      <div class="modal-header">
+        <h3>📄 Politique d’utilisation</h3>
+        <span class="close-btn" onclick="closeModal()">✖</span>
+      </div>
+  
+      <div class="modal-body">
+  
+        <p><b>ÀTonService</b> est une plateforme de mise en relation.</p>
+  
+        <p><b>Données :</b><br>
+            • Nom / pseudo, numéro, quartier<br>
+            • Utilisées pour afficher les services sur la carte<br>
+            • Jamais vendues</p>
+            
+            <p><b>Contact :</b><br>
+            • Mise en relation via WhatsApp<br>
+            • Aucune conversation stockée</p>
+            
+            <p><b>Visibilité :</b><br>
+            • Profil visible par les autres utilisateurs<br>
+            • Quartier et service affichés</p>
+            
+            <p><b>Paiement :</b><br>
+            • Paiement via la plateforme<br>
+            • Commission de <b>10%</b><br>
+            • Reste versé au prestataire</br>
+            • Transactions sécurisées</p>
+            
+            <p><b>Sécurité :</b><br>
+            • Données sécurisées via Supabase<br>
+            • Ne partagez pas vos accès<br>
+            • Utilisation à vos risques</p>
+            
+            <p><b>Vos droits :</b><br>
+            • Modification ou suppression sur demande<br>
+            • Utilisation du site = acceptation</p>
+  
+      </div>
+  
+      <div class="modal-footer">
+  
+        <label class="checkbox">
+          <input type="checkbox" id="acceptPolicy">
+          J’ai lu et accepté
+        </label>
+  
+        <button id="confirmBtn" disabled>Continuer</button>
+  
+      </div>
+  
+    </div>
+  
+  </div>
+
+<!-- TOAST -->  
+<div id="toast-container"></div>  
+
+<!-- PAYMENT MODAL-->
+<div id="paymentModal" class="modal">
+
+    <div class="modal-box">
+
+        <div class="modal-header">
+            <h3><i class="fa-solid fa-wallet" style="color: goldenrod;"></i> Paiement sécurisé</h3>
+            <span class="close-btn" onclick="closePaymentModal()">✖</span>
+        </div>
+
+        <div class="modal-body">
+
+            <p><b>Prestataire :</b> <span id="payName"></span></p>
+            <p><b>Service :</b> <span id="payService"></span></p>
+            <p><b>Quartier :</b> <span id="payQuartier"></span></p>
+
+            <input id="payPhone" placeholder="Ton numéro (Mobile Money)">
+            <input id="payAmount" placeholder="Montant (FCFA)" type="number">
+
+        </div>
+
+        <div class="modal-footer">
+            <button id="payBtn">Payer maintenant</button>
+        </div>
+
+    </div>
+
+</div>
+
+<!-- CONFIRM MODAL -->
+<div id="confirmModal" class="modal">
+
+    <div class="confirm-box">
+
+        <div class="checkmark">✅</div>
+
+        <h2>Demande de paiement envoyée</h2>
+
+        <p id="confirmText">
+            Votre demande de paiement a été envoyée avec succès.
+        </p>
+
+        <div class="loader"></div>
+
+        <small>Redirection en cours...</small>
+
+    </div>
+
+</div>
+
+<!-- TIKTOK BUTTON -->
+<a href="https://www.tiktok.com/@atonservice09" target="_blank" class="tiktok-fab">
+
+   <i class="fa-brands fa-tiktok"></i>
+    <span class="tiktok-badge">NEW</span>
+</a>
+
+</body>
+
+<!-- SCRIPT PRINCIPAL -->
+<script src="js/main.js"></script>
+
+</body>
+</html>
