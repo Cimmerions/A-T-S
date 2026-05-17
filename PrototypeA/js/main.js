@@ -202,19 +202,6 @@ function getCoords(quartier){
     return coords[quartier] || [6.135, 1.217];
 }
 
-function reserve(name, num, service, quartier){
-
-    let msg =
-    "Bonjour, je veux réserver un service%0A" +
-    "Prestataire: " + name + "%0A" +
-    "Numéro: " + num + "%0A" +
-    "Service: " + service + "%0A" +
-    "Quartier: " + quartier + "%0A%0A" +
-    "Je suis prêt à payer.";
-
-    window.open("https://wa.me/22893264869?text=" + msg, "_blank");
-}
-
 function contact(num, service, quartier){
 
 let message =
@@ -426,11 +413,9 @@ try {
 
     await loadServices();
 
-    window.open(
-        "https://wa.me/" + myNumber +
-        "?text=Nouvelle inscription " + name,
-        "_blank"
-    );
+    wa.location.href =
+    "https://wa.me/" + myNumber +
+    "?text=Nouvelle inscription " + name;
 
     alert("✅ Inscription réussie");
 
